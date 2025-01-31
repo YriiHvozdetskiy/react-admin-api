@@ -1,3 +1,5 @@
+import os
+import uvicorn
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from authx import AuthX, AuthXConfig, RequestToken
@@ -27,9 +29,15 @@ class LoginRequest(BaseModel):
     username: str
     password: str
 
+
 @app.post('/login')
 def login(request: LoginRequest):
     if request.username == "user" and request.password == "user":
         token = auth.create_access_token(uid=request.username)
         return {"token": token}
     raise HTTPException(401, detail={"message": "Invalid credentials"})
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
