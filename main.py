@@ -38,6 +38,5 @@ def login(request: LoginRequest):
     raise HTTPException(401, detail={"message": "Invalid credentials"})
 
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    app.run(debug=True)
