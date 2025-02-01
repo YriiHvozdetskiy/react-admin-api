@@ -1,5 +1,4 @@
 import os
-import uvicorn
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from authx import AuthX, AuthXConfig, RequestToken
@@ -38,6 +37,5 @@ def login(request: LoginRequest):
     raise HTTPException(401, detail={"message": "Invalid credentials"})
 
 
-# python web server
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
